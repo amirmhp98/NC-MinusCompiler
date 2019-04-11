@@ -1,5 +1,6 @@
 package parser;
 
+import domain.Error;
 import domain.*;
 
 import java.util.ArrayList;
@@ -12,10 +13,6 @@ import java.util.regex.Pattern;
  * Created by amirmhp on 4/11/2019.
  */
 public class ParserUtils {
-    private ArrayList<String> keywords = new ArrayList<>(Arrays.asList
-            ("if", "else", "void", "int", "while", "break", "continue", "switch", "default", "case", "return"));
-    private ArrayList<String> symbols = new ArrayList<>(Arrays.asList
-            (";", ":", "[", "]", "(", ")", "{", "}", "+", "-", "+", "*", "=", "<", "=="));
 
     private ArrayList<String> keywords = new ArrayList<>(Arrays.asList
             ("if", "else", "void", "int", "while", "break", "continue", "switch", "default", "case", "return"));
@@ -54,10 +51,6 @@ public class ParserUtils {
         return Arrays.asList(inputText.split("~"));
     }
 
-    protected ParseResult parseLineWords(List<String> inputWords) {
-        //todo implement
-        return null;
-    }
 
     protected String generateTokensString (ArrayList<List<Token>> parsedLines){
         //todo implement
