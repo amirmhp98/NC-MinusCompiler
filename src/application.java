@@ -4,7 +4,6 @@ import parser.ParserService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by amirmhp on 4/11/2019.
@@ -16,36 +15,34 @@ public class application {
             (";", ":", "[", "]", "(", ")", "{", "}", "+", "-", "+", "==", "*", "=", "<"));
 
     public static void main(String[] args) {
-        String readPath = "";
-        String writePath = "";
-        String text = io.readFromFile(readPath);
+        String readingFileName = "";
+        String text = io.readFromFile(readingFileName);
         FinalResult result = parserService.parse(text);
-        io.writeIntoFile(result.getTokens(), writePath, "scanner.txt");
-        io.writeIntoFile(result.getErrors(), writePath, "lexical_errors.txt");
-        test();
+        io.writeIntoFile(result.getTokens(), "scanner.txt");
+        io.writeIntoFile(result.getErrors(), "lexical_errors.txt");
     }
 
 
-    protected static List<String> seprateLines(String inputText) {
-        return Arrays.asList(inputText.split("\\r?\\n"));
-    }
-
-    private static void test() {
-        replaceSymbolsAndWSs("line1;\n" +
-                "line2\n" +
-                "l3\n" +
-                "lll555;");
-    }
-
-    protected static String replaceSymbolsAndWSs(String inputText) {
-        inputText = inputText.replace("\\s+", "~");
-        for (String symbol : symbols) {
-            inputText = inputText.replace(symbol, "~" + symbol + "~");
-        }
-        inputText = inputText.replace("~~", "~");
-        inputText = inputText.replace("~~", "~");
-        return inputText;
-    }
+//    protected static List<String> seprateLines(String inputText) {
+//        return Arrays.asList(inputText.split("\\r?\\n"));
+//    }
+//
+//    private static void test() {
+//        replaceSymbolsAndWSs("line1;\n" +
+//                "line2\n" +
+//                "l3\n" +
+//                "lll555;");
+//    }
+//
+//    protected static String replaceSymbolsAndWSs(String inputText) {
+//        inputText = inputText.replace("\\s+", "~");
+//        for (String symbol : symbols) {
+//            inputText = inputText.replace(symbol, "~" + symbol + "~");
+//        }
+//        inputText = inputText.replace("~~", "~");
+//        inputText = inputText.replace("~~", "~");
+//        return inputText;
+//    }
 
 
 }
