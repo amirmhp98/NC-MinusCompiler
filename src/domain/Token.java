@@ -6,4 +6,13 @@ package domain;
 public class Token {
     String value;
     TokenType type;
+
+    @Override
+    public String toString() {
+        return "("+
+                type.toString()+
+                ", "+
+                value+
+                ")";
+    }
 }
