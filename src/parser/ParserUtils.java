@@ -1,5 +1,7 @@
 package parser;
 
+import domain.ParseResult;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class ParserUtils {
         return Arrays.asList(inputText.split("\\n"));
     }
 
-    protected List<String> splitByWhitespaces(String inputText){
+    protected String replaceSymbolsAndWSs(String inputText){
         //todo implement
         return null;
     }
@@ -29,6 +31,11 @@ public class ParserUtils {
      * it's important to put the symbols in result list
      */
     protected List<String> splitBySymbols(String inputText){
+        //todo implement
+        return null;
+    }
+
+    protected List<ParseResult> parseLineWords(List<String> inputWords){
         //todo implement
         return null;
     }
