@@ -2,6 +2,8 @@ import domain.FinalResult;
 import io.FileIOHandler;
 import parser.ParserService;
 
+import java.util.ArrayList;
+
 /**
  * Created by amirmhp on 4/11/2019.
  */
@@ -10,15 +12,15 @@ public class application {
     private static FileIOHandler io = new FileIOHandler();
  
     public static void main(String[] args) {
-        String readingFileName = "";
-        String text = io.readFromFile(readingFileName);
+        String readingFileName = "input.txt";
+        ArrayList<String> text = io.readFromFile(readingFileName);
         FinalResult result = parserService.parse(text);
-        io.writeIntoFile(result.getTokens(), "scanner.txt");
-        io.writeIntoFile(result.getErrors(), "lexical_errors.txt");
+//        io.writeIntoFile(result.getTokens(), "scanner.txt");
+//        io.writeIntoFile(result.getErrors(), "lexical_errors.txt");
     }
 
 
-//    protected static List<String> seprateLines(String inputText) {
+//    protected static List<String> separateLines(String inputText) {
 //        return Arrays.asList(inputText.split("\\r?\\n"));
 //    }
 //

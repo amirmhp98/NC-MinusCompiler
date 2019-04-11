@@ -22,15 +22,52 @@ public class ParserUtils {
             " ", "\\r", "\\t", "\\v", "\\f"
     ));
 
-    /**
-     * also think about linings while you remove comments
-     */
-    protected String removeComment(String inputText) {
-        //todo implement
+    private String removeMiddleComment(String inputText) {
+        int indexBegin = inputText.indexOf("/*");
+        if (indexBegin != -1) {
+            int indexEnd = inputText.substring(indexBegin + 2).indexOf("*/");
+            if (indexEnd != -1) {
+                return inputText.substring(0, indexBegin) + this.removeMiddleComment(inputText.substring(indexEnd + 2));
+            }
+        }
         return inputText;
     }
 
-    protected List<String> seprateLines(String inputText) {
+    /**
+     * also think about linings while you remove comments
+     */
+    protected ArrayList<String> removeComment(ArrayList<String> inputText) {
+        boolean commentFlag = false;
+        for (int i = 0; i < inputText.size(); i++) {
+            if (!commentFlag) {
+                int index = inputText.get(i).indexOf("//");
+                if (index != -1) {
+                    inputText.set(i, inputText.get(i).substring(0, i));
+                    continue;
+                }
+                inputText.set(i, this.removeMiddleComment(inputText.get(i)));
+                index = inputText.get(i).indexOf("/*");
+                if (index != -1) {
+                    commentFlag = true;
+                    inputText.set(i, inputText.get(i).substring(0, index + 2));
+                }
+            }
+            else {
+                int index = inputText.get(i).indexOf("*/");
+                if (index == -1) {
+                    inputText.set(i, "");
+                    continue;
+                }
+                commentFlag = false;
+                inputText.set(i, inputText.get(i).substring(0, index + 2));
+                i --;
+            }
+        }
+
+        return inputText;
+    }
+
+    protected List<String> separateLines(String inputText) {
         return Arrays.asList(inputText.split("\\r?\\n"));
     }
 
@@ -39,8 +76,8 @@ public class ParserUtils {
         for (String symbol : symbols) {
             inputText = inputText.replace(symbol, "~" + symbol + "~");
         }
-        inputText = inputText.replace("~~","~");
-        inputText = inputText.replace("~~","~");
+        inputText = inputText.replace("~~", "~");
+        inputText = inputText.replace("~~", "~");
         return inputText;
     }
 
@@ -52,32 +89,32 @@ public class ParserUtils {
     }
 
 
-    protected String generateTokensString (ArrayList<List<Token>> parsedLines){
+    protected String generateTokensString(ArrayList<List<Token>> parsedLines) {
         //todo implement
         return null;
     }
 
-    private boolean isKeyword(String inputWord){
+    private boolean isKeyword(String inputWord) {
         return this.keywords.contains(inputWord);
     }
 
-    private boolean isSymbol(String inputWord){
+    private boolean isSymbol(String inputWord) {
         return this.symbols.contains(inputWord);
     }
 
-    private boolean isId(String inputWord){
+    private boolean isId(String inputWord) {
         Pattern pattern = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
         Matcher matcher = pattern.matcher(inputWord);
         return matcher.find();
     }
 
-    private boolean isNum(String inputWord){
+    private boolean isNum(String inputWord) {
         Pattern pattern = Pattern.compile("^[0-9]+$");
         Matcher matcher = pattern.matcher(inputWord);
         return matcher.find();
     }
 
-    private TokenType getTokenType(String inputWord){
+    private TokenType getTokenType(String inputWord) {
         if (this.isKeyword(inputWord)) {
             return TokenType.KEYWORD;
         }
@@ -93,7 +130,7 @@ public class ParserUtils {
         return TokenType.NOTHING;
     }
 
-    private ParseResult parseWord(String inputWord){
+    private ParseResult parseWord(String inputWord) {
         ParseResult parseResult = new ParseResult();
         TokenType tokenType = getTokenType(inputWord);
         if (!tokenType.equals(TokenType.NOTHING)) {
@@ -117,7 +154,7 @@ public class ParserUtils {
         return parseResult;
     }
 
-    protected ParseResult parseLineWords(List<String> inputWords){
+    protected ParseResult parseLineWords(List<String> inputWords) {
         //todo implement
         ParseResult parseResults = new ParseResult();
         for (String inputWord : inputWords) {
