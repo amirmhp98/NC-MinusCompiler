@@ -1,22 +1,24 @@
 package io;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Created by amirmhp on 4/11/2019.
  */
 public class FileIOHandler {
-    public String readFromFile(String fileName){
-        StringBuilder stringBuilder = new StringBuilder();
+    public ArrayList<String> readFromFile(String fileName){
+        ArrayList<String> strings = new ArrayList<>();
         try {
             String line;
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             while((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
+                strings.add(line);
             }
             bufferedReader.close();
-            return stringBuilder.toString();
+            fileReader.close();
+            return strings;
         } catch (java.io.IOException e) {
             e.printStackTrace();
             return null;
