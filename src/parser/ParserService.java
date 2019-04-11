@@ -8,6 +8,8 @@ import java.util.Arrays;
  */
 public class ParserService {
 
+    ParserUtils parserUtils = new ParserUtils();
+
     ArrayList<String> keywords = new ArrayList<>(Arrays.asList
             ("if", "else", "void", "int", "while", "break", "continue", "switch", "default", "case", "return"));
     ArrayList<String> symbols = new ArrayList<>(Arrays.asList
