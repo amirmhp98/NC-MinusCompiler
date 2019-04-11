@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleLocalSettings">
-    <option name="modificationStamps">
-      <map>
-        <entry key="D:/Uni/System Analysis and Design/Project/by initilizr/Taskmanager" value="3095052480000" />
-        <entry key="D:/Uni/System Analysis and Design/Project/sobhan/TaskManager" value="3097139632450" />
-        <entry key="D:/Uni/System Analysis and Design/Project/sourcecode/TaskManager" value="1545334671547" />
-        <entry key="D:/Uni/System Analysis and Design/Project/sourcecode/spring-boot-shiro-example" value="1546518485187" />
-        <entry key="D:/Work/fanap/project/FanapIoT" value="3005197395684" />
-      </map>
-    </option>
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
