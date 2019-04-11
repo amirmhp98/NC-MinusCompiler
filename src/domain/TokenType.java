@@ -8,7 +8,6 @@ public enum TokenType {
     ID,
     KEYWORD,
     SYMBOL,
-    COMMENT,
-    WHITESPACE,
-    EOF
+    EOF,
+    NOTHING
 }
