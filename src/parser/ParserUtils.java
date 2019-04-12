@@ -5,29 +5,28 @@ import domain.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by amirmhp on 4/11/2019.
  */
-public class ParserUtils {
+class ParserUtils {
 
     private ArrayList<String> keywords = new ArrayList<>(Arrays.asList
             ("if", "else", "void", "int", "while", "break", "continue", "switch", "default", "case", "return"));
     private ArrayList<String> symbols = new ArrayList<>(Arrays.asList
             (";", ":", "[", "]", "(", ")", "{", "}", "+", "-", "+", "==", "*", "=", "<"));
-    private ArrayList<String> WSs = new ArrayList<>(Arrays.asList(
-            " ", "\\r", "\\t", "\\v", "\\f"
-    ));
+//    private ArrayList<String> WSs = new ArrayList<>(Arrays.asList(
+//            " ", "\\r", "\\t", "\\v", "\\f"
+//    ));
 
     private String removeMiddleComment(String inputText) {
         int indexBegin = inputText.indexOf("/*");
         if (indexBegin != -1) {
             int indexEnd = inputText.substring(indexBegin + 2).indexOf("*/");
             if (indexEnd != -1) {
-                return inputText.substring(0, indexBegin) + this.removeMiddleComment(inputText.substring(indexEnd + 2));
+                return inputText.substring(0, indexBegin) + this.removeMiddleComment(inputText.substring(indexEnd + indexBegin + 4));
             }
         }
         return inputText;
@@ -36,62 +35,55 @@ public class ParserUtils {
     /**
      * also think about linings while you remove comments
      */
-    protected ArrayList<String> removeComment(ArrayList<String> inputText) {
+    ArrayList<String> removeComment(ArrayList<String> inputText) {
         boolean commentFlag = false;
         for (int i = 0; i < inputText.size(); i++) {
             if (!commentFlag) {
                 int index = inputText.get(i).indexOf("//");
                 if (index != -1) {
-                    inputText.set(i, inputText.get(i).substring(0, i));
+                    inputText.set(i, inputText.get(i).substring(0, index));
                     continue;
                 }
                 inputText.set(i, this.removeMiddleComment(inputText.get(i)));
                 index = inputText.get(i).indexOf("/*");
                 if (index != -1) {
                     commentFlag = true;
-                    inputText.set(i, inputText.get(i).substring(0, index + 2));
+                    inputText.set(i, inputText.get(i).substring(0, index));
                 }
-            }
-            else {
+            } else {
                 int index = inputText.get(i).indexOf("*/");
                 if (index == -1) {
                     inputText.set(i, "");
                     continue;
                 }
                 commentFlag = false;
-                inputText.set(i, inputText.get(i).substring(0, index + 2));
-                i --;
+                inputText.set(i, inputText.get(i).substring(index + 2));
+                i--;
             }
         }
 
         return inputText;
     }
 
-    protected List<String> separateLines(String inputText) {
-        return Arrays.asList(inputText.split("\\r?\\n"));
-    }
+    ArrayList<String> replaceSymbolsAndWSs(ArrayList<String> inputText) {
+        for (int i = 0; i < inputText.size(); i++) {
 
-    protected String replaceSymbolsAndWSs(String inputText) {
-        inputText = inputText.replace("\\s+", "~");
-        for (String symbol : symbols) {
-            inputText = inputText.replace(symbol, "~" + symbol + "~");
+            String inputLine = inputText.get(i).replaceAll("(?:\\s|&nbsp;)+", " ");
+            inputLine = inputLine.replaceAll(" +", "~");
+            for (String symbol : symbols) {
+                inputLine = inputLine.replace(symbol, "~" + symbol + "~");
+            }
+            inputLine = inputLine.replaceAll("~+", "~");
+            inputText.set(i, inputLine);
         }
-        inputText = inputText.replace("~~", "~");
-        inputText = inputText.replace("~~", "~");
         return inputText;
     }
 
     /**
      * it's important to put the symbols in result list
      */
-    protected List<String> splitToWords(String inputText) {
-        return Arrays.asList(inputText.split("~"));
-    }
-
-
-    protected String generateTokensString(ArrayList<List<Token>> parsedLines) {
-        //todo implement
-        return null;
+    String[] splitToWords(String inputText) {
+        return inputText.split("~");
     }
 
     private boolean isKeyword(String inputWord) {
@@ -132,6 +124,9 @@ public class ParserUtils {
 
     private ParseResult parseWord(String inputWord) {
         ParseResult parseResult = new ParseResult();
+        if (inputWord.length() == 0) {
+            return parseResult;
+        }
         TokenType tokenType = getTokenType(inputWord);
         if (!tokenType.equals(TokenType.NOTHING)) {
             parseResult.addToken(new Token(tokenType, inputWord));
@@ -154,8 +149,7 @@ public class ParserUtils {
         return parseResult;
     }
 
-    protected ParseResult parseLineWords(List<String> inputWords) {
-        //todo implement
+    ParseResult parseLineWords(String[] inputWords) {
         ParseResult parseResults = new ParseResult();
         for (String inputWord : inputWords) {
             ParseResult parseResult = this.parseWord(inputWord);

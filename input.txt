@@ -3,14 +3,18 @@ void main(void){
     // comment
     a = 2 + +2;
     a = a + -3;
+    // salam
     cde = a;
+    /*
+    salam bar shoma
+    */
     if (b /*comment*/ == 3) {
         a = 3;
         cd!e = -7;
     }
     else
     {
-        b = a < cde;
+        b /*salam*/ = a < /*salam*/ cde;
         {cde = @2;
     }}
     return;

@@ -14,7 +14,7 @@ public class application {
     public static void main(String[] args) {
         String readingFileName = "input.txt";
         ArrayList<String> text = io.readFromFile(readingFileName);
-        FinalResult result = parserService.parse(text);
+        parserService.parse(text);
 //        io.writeIntoFile(result.getTokens(), "scanner.txt");
 //        io.writeIntoFile(result.getErrors(), "lexical_errors.txt");
     }
