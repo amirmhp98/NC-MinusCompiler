@@ -24,16 +24,16 @@ public class ParserService {
         for (int i = 0; i < text.size(); i++) {
             ParseResult parseResult = parserUtils.parseLineWords(parserUtils.splitToWords(text.get(i)));
             if (!parseResult.getTokens().isEmpty()) {
-                tokensBuilder.append((i + 1) + "- ");
+                tokensBuilder.append((i + 1) + ". ");
                 for (int j = 0; j < parseResult.getTokens().size(); j++) {
-                    tokensBuilder.append("(" + parseResult.getTokens().get(j).getValue() + ", " + parseResult.getTokens().get(j).getType().toString() + ")");
+                    tokensBuilder.append("(" + parseResult.getTokens().get(j).getType().toString() + ", " + parseResult.getTokens().get(j).getValue() + ") ");
                 }
                 tokensBuilder.append("\n");
             }
             if (!parseResult.getErrors().isEmpty()) {
-                errorBuilder.append((i + 1) + "- ");
+                errorBuilder.append((i + 1) + ". ");
                 for (int j = 0; j < parseResult.getErrors().size(); j++) {
-                    errorBuilder.append("(" + parseResult.getErrors().get(j).getValue() + ", " + parseResult.getErrors().get(j).getType().toString() + ")");
+                    errorBuilder.append("(" + parseResult.getErrors().get(j).getValue() + ", " + parseResult.getErrors().get(j).getType().toString().toLowerCase().replace("_", " ") + ") ");
                 }
                 errorBuilder.append("\n");
             }
