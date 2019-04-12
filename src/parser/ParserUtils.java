@@ -141,7 +141,7 @@ class ParserUtils {
             tokenType = getTokenType(inputWord.substring(i));
             if (tokenType.equals(TokenType.NOTHING)) {
                 parseResult.addToken(new Token(last, inputWord.substring(i + 1)));
-                parseResult.addError(new Error(ErrorType.INVALID_INPUT, inputWord.substring(1, i + 1)));
+                parseResult.addError(new Error(ErrorType.INVALID_INPUT, inputWord.substring(0, i + 1)));
                 return parseResult;
             }
             last = tokenType;

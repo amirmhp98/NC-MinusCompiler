@@ -14,32 +14,13 @@ public class application {
     public static void main(String[] args) {
         String readingFileName = "input.txt";
         ArrayList<String> text = io.readFromFile(readingFileName);
-        parserService.parse(text);
-//        io.writeIntoFile(result.getTokens(), "scanner.txt");
-//        io.writeIntoFile(result.getErrors(), "lexical_errors.txt");
+        FinalResult result = parserService.parse(text);
+        io.writeIntoFile(result.getTokens(), "scanner.txt");
+        io.writeIntoFile(result.getErrors(), "lexical_errors.txt");
     }
 
 
-//    protected static List<String> separateLines(String inputText) {
-//        return Arrays.asList(inputText.split("\\r?\\n"));
-//    }
-//
-//    private static void test() {
-//        replaceSymbolsAndWSs("line1;\n" +
-//                "line2\n" +
-//                "l3\n" +
-//                "lll555;");
-//    }
-//
-//    protected static String replaceSymbolsAndWSs(String inputText) {
-//        inputText = inputText.replace("\\s+", "~");
-//        for (String symbol : symbols) {
-//            inputText = inputText.replace(symbol, "~" + symbol + "~");
-//        }
-//        inputText = inputText.replace("~~", "~");
-//        inputText = inputText.replace("~~", "~");
-//        return inputText;
-//    }
+
 
 
 }
