@@ -45,6 +45,7 @@ public class ParserService {
                 errorBuilder.append("\n");
             }
         }
+        //todo add end of file token to scanData
         ParseResult parseResult = this.parserUtils.parseTokens(scanData);
         // parse result have parser result
         FinalResult result = new FinalResult();

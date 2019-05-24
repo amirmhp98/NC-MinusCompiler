@@ -2,18 +2,18 @@ package parser;
 
 import domain.ParseResult;
 import domain.ScanData;
+import domain.TerminalData;
 import domain.TerminalType;
 
 import java.util.HashMap;
-import java.util.Map;
 
-public class ParserUtils {
+class ParserUtils {
     // todo : write LL1 table here
-    private Map table;
+    private static HashMap<TerminalType, TerminalData> table = new HashMap<>();
 
-    public ParserUtils(){
-        table = new HashMap();
-        table.put(TerminalType.A, "salam");
+    ParserUtils(){
+
+        table.put(TerminalType.A, null);
     }
 
     ParseResult parseTokens(ScanData scanData){
