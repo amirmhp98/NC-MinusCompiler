@@ -2,6 +2,8 @@ package parser;
 
 import domain.FinalResult;
 import domain.ParseResult;
+import domain.ScanData;
+import domain.ScanResult;
 
 import java.util.ArrayList;
 
@@ -10,34 +12,41 @@ import java.util.ArrayList;
  */
 public class ParserService {
 
+    private ScannerUtils scannerUtils;
     private ParserUtils parserUtils;
 
     public ParserService() {
+        this.scannerUtils = new ScannerUtils();
         this.parserUtils = new ParserUtils();
     }
 
     public FinalResult parse(ArrayList<String> text) {
         StringBuilder tokensBuilder = new StringBuilder();
         StringBuilder errorBuilder = new StringBuilder();
-        text = parserUtils.removeComment(text);
-        text = parserUtils.replaceSymbolsAndWSs(text);
+        text = scannerUtils.removeComment(text);
+        text = scannerUtils.replaceSymbolsAndWSs(text);
+        ScanData scanData = new ScanData();
         for (int i = 0; i < text.size(); i++) {
-            ParseResult parseResult = parserUtils.parseLineWords(parserUtils.splitToWords(text.get(i)));
-            if (!parseResult.getTokens().isEmpty()) {
-                tokensBuilder.append((i + 1) + ". ");
-                for (int j = 0; j < parseResult.getTokens().size(); j++) {
-                    tokensBuilder.append("(" + parseResult.getTokens().get(j).getType().toString() + ", " + parseResult.getTokens().get(j).getValue() + ") ");
+            //line number is: i + 1
+            ScanResult scanResult = scannerUtils.scanLineWords(scannerUtils.splitToWords(text.get(i)));
+            scanData.addTokenByLineNumber(scanResult.getScanTokens(), i + 1);
+            if (!scanResult.getScanTokens().isEmpty()) {
+                tokensBuilder.append(i + 1).append(". ");
+                for (int j = 0; j < scanResult.getScanTokens().size(); j++) {
+                    tokensBuilder.append("(").append(scanResult.getScanTokens().get(j).getType().toString()).append(", ").append(scanResult.getScanTokens().get(j).getValue()).append(") ");
                 }
                 tokensBuilder.append("\n");
             }
-            if (!parseResult.getErrors().isEmpty()) {
-                errorBuilder.append((i + 1) + ". ");
-                for (int j = 0; j < parseResult.getErrors().size(); j++) {
-                    errorBuilder.append("(" + parseResult.getErrors().get(j).getValue() + ", " + parseResult.getErrors().get(j).getType().toString().toLowerCase().replace("_", " ") + ") ");
+            if (!scanResult.getScanErrors().isEmpty()) {
+                errorBuilder.append(i + 1).append(". ");
+                for (int j = 0; j < scanResult.getScanErrors().size(); j++) {
+                    errorBuilder.append("(").append(scanResult.getScanErrors().get(j).getValue()).append(", ").append(scanResult.getScanErrors().get(j).getType().toString().toLowerCase().replace("_", " ")).append(") ");
                 }
                 errorBuilder.append("\n");
             }
         }
+        ParseResult parseResult = this.parserUtils.parseTokens(scanData);
+        // parse result have parser result
         FinalResult result = new FinalResult();
         result.setTokens(tokensBuilder.toString());
         result.setErrors(errorBuilder.toString());
