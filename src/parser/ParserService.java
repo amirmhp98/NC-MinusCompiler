@@ -1,56 +1,24 @@
 package parser;
 
-import domain.FinalResult;
 import domain.ParseResult;
 import domain.ScanData;
-import domain.ScanResult;
+import domain.TerminalType;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-/**
- * Created by amirmhp on 4/11/2019.
- */
 public class ParserService {
+    // todo : write LL1 table here
+    private Map table;
 
-    private ScannerUtils scannerUtils;
-    private ParserUtils parserUtils;
-
-    public ParserService() {
-        this.scannerUtils = new ScannerUtils();
-        this.parserUtils = new ParserUtils();
+    public ParserService(){
+        table = new HashMap();
+        table.put(TerminalType.A, "salam");
     }
 
-    public FinalResult parse(ArrayList<String> text) {
-        StringBuilder tokensBuilder = new StringBuilder();
-        StringBuilder errorBuilder = new StringBuilder();
-        text = scannerUtils.removeComment(text);
-        text = scannerUtils.replaceSymbolsAndWSs(text);
-        ScanData scanData = new ScanData();
-        for (int i = 0; i < text.size(); i++) {
-            //line number is: i + 1
-            ScanResult scanResult = scannerUtils.scanLineWords(scannerUtils.splitToWords(text.get(i)));
-            scanData.addTokenByLineNumber(scanResult.getScanTokens(), i + 1);
-            if (!scanResult.getScanTokens().isEmpty()) {
-                tokensBuilder.append(i + 1).append(". ");
-                for (int j = 0; j < scanResult.getScanTokens().size(); j++) {
-                    tokensBuilder.append("(").append(scanResult.getScanTokens().get(j).getType().toString()).append(", ").append(scanResult.getScanTokens().get(j).getValue()).append(") ");
-                }
-                tokensBuilder.append("\n");
-            }
-            if (!scanResult.getScanErrors().isEmpty()) {
-                errorBuilder.append(i + 1).append(". ");
-                for (int j = 0; j < scanResult.getScanErrors().size(); j++) {
-                    errorBuilder.append("(").append(scanResult.getScanErrors().get(j).getValue()).append(", ").append(scanResult.getScanErrors().get(j).getType().toString().toLowerCase().replace("_", " ")).append(") ");
-                }
-                errorBuilder.append("\n");
-            }
-        }
-        ParseResult parseResult = this.parserUtils.parseTokens(scanData);
-        // parse result have parser result
-        FinalResult result = new FinalResult();
-        result.setTokens(tokensBuilder.toString());
-        result.setErrors(errorBuilder.toString());
-        return result;
+    ParseResult parseTokens(ScanData scanData){
+        //write scan data one by one with line number and detect
+        return null;
     }
 
 }
