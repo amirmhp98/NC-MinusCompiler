@@ -6,6 +6,7 @@ package domain;
 public class ScanFinalResult {
     private String tokens;
     private String errors;
+    private ScanData scanData;
 
     public String getTokens() {
         return tokens;
@@ -21,5 +22,13 @@ public class ScanFinalResult {
 
     public void setErrors(String errors) {
         this.errors = errors;
+    }
+
+    public ScanData getScanData() {
+        return scanData;
+    }
+
+    public void setScanData(ScanData scanData) {
+        this.scanData = scanData;
     }
 }

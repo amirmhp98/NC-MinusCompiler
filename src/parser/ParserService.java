@@ -16,7 +16,7 @@ public class ParserService {
 		parserUtils = new ParserUtils();
 	}
 
-	ParseResult parse(ScanData scanData) {
+	public ParseResult parse(ScanData scanData) {
 		StringBuilder resultStringBuilder = new StringBuilder();
 		int depth = 0;
 		scanIndex = 0;
@@ -52,8 +52,8 @@ public class ParserService {
 				}
 			}
 		}
-		//write scan data one by one with line number and detect
-		return null;
+		//write scan data one by one with line number and detect  // ??
+		return new ParseResult(resultStringBuilder.toString());
 	}
 
 	private void appendToResult(StringBuilder resultStringBuilder, String token, int depth) {
@@ -68,7 +68,9 @@ public class ParserService {
 		//todo perform pipeline
 		//todo handle arrayOutOfBoundException
 		this.scanIndex++;
-		return scanData.getScanTokens().get(scanIndex);
+		if (scanIndex<scanData.getScanTokens().size()){
+		return scanData.getScanTokens().get(scanIndex);}
+		else return new ScanToken(TokenType.EOF, "EOF");
 	}
 
 }

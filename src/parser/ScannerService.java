@@ -45,11 +45,11 @@ public class ScannerService {
                 errorBuilder.append("\n");
             }
         }
-        ParseResult parseResult = this.parserUtils.parseTokens(scanData);
         // scan result have parser result
         ScanFinalResult result = new ScanFinalResult();
         result.setTokens(tokensBuilder.toString());
         result.setErrors(errorBuilder.toString());
+        result.setScanData(scanData);
         return result;
     }
 
