@@ -23,7 +23,7 @@ public class ParserUtils {
 
 
 	/**
-	 * parser service call this method and pass token and a non-terminal to get right side of the grammar which is our current destination.
+	 * parser service call this method and pass token and a non-terminal to get right side of the grammar which is our current destination..
 	 *
 	 * @param inputToken
 	 * @param currentToken -> non-terminal
