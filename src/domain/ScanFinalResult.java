@@ -3,7 +3,7 @@ package domain;
 /**
  * Created by amirmhp on 4/11/2019.
  */
-public class FinalResult {
+public class ScanFinalResult {
     private String tokens;
     private String errors;
 

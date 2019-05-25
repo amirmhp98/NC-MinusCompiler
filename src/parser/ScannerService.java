@@ -1,6 +1,6 @@
 package parser;
 
-import domain.FinalResult;
+import domain.ScanFinalResult;
 import domain.ParseResult;
 import domain.ScanData;
 import domain.ScanResult;
@@ -20,7 +20,7 @@ public class ScannerService {
         this.parserUtils = new ParserUtils();
     }
 
-    public FinalResult scan(ArrayList<String> text) {
+    public ScanFinalResult scan(ArrayList<String> text) {
         StringBuilder tokensBuilder = new StringBuilder();
         StringBuilder errorBuilder = new StringBuilder();
         text = scannerUtils.removeComment(text);
@@ -47,10 +47,12 @@ public class ScannerService {
         }
         ParseResult parseResult = this.parserUtils.parseTokens(scanData);
         // scan result have parser result
-        FinalResult result = new FinalResult();
+        ScanFinalResult result = new ScanFinalResult();
         result.setTokens(tokensBuilder.toString());
         result.setErrors(errorBuilder.toString());
         return result;
     }
+
+
 
 }

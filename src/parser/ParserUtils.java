@@ -15,13 +15,6 @@ public class ParserUtils {
 		table.put(TerminalType.A, "salam");
 	}
 
-	//nemidumam in chie
-	ParseResult parseTokens(ScanData scanData) {
-		//write scan data one by one with line number and detect
-		return null;
-	}
-
-
 	/**
 	 * parser service call this method and pass token and a non-terminal to get right side of the grammar which is our current destination..
 	 *

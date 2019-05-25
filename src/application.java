@@ -1,4 +1,4 @@
-import domain.FinalResult;
+import domain.ScanFinalResult;
 import io.FileIOHandler;
 import parser.ScannerService;
 
@@ -14,7 +14,7 @@ public class application {
     public static void main(String[] args) {
         String readingFileName = "input.txt";
         ArrayList<String> text = io.readFromFile(readingFileName);
-        FinalResult result = scannerService.scan(text);
+        ScanFinalResult result = scannerService.scan(text);
         io.writeIntoFile(result.getTokens(), "scanner.txt");
         io.writeIntoFile(result.getErrors(), "lexical_errors.txt");
     }
