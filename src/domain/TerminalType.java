@@ -1,6 +1,6 @@
 package domain;
 
 public enum TerminalType {
-    //TODO reza: 5/25/19 fill types here
-    A,B,program,depthFlag,eps
+    PR, PL, ID, COMMA, VOID, INT, BR, BL, NUM, MINUS, PLUS, MULT, LESS, EQ, ASGN, COLON, DEFAULT, CASE, KR, KL,
+    SWITCH, SEMICOLON, RETURN, WHILE, ELSE, IF, CONTINUE, BREAK, EOF
 }

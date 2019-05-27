@@ -7,6 +7,20 @@ public class ParseToken {
     private String value;
     private int lineNumber;
 
+    public ParseToken(TerminalType terminalType) {
+        this.terminalType = terminalType;
+        this.isTerminal = true;
+        this.value = null;
+        this.lineNumber = 0;
+    }
+
+    public ParseToken(NonTerminalType nonTerminalType) {
+        this.nonTerminalType = nonTerminalType;
+        this.isTerminal = false;
+        this.value = null;
+        this.lineNumber = 0;
+    }
+
     public ParseToken(TerminalType terminalType, String value, int lineNumber) {
         this.terminalType = terminalType;
         this.isTerminal = true;
