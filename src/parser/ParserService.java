@@ -3,8 +3,6 @@ package parser;
 import domain.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 public class ParserService {
@@ -17,8 +15,10 @@ public class ParserService {
         parseStack.push(new ParseToken(NonTerminalType.Program, null, 0));
     }
 
-    public void run() {
+    public String run() {
         ScanToken scanToken;
+        StringBuilder output = new StringBuilder();
+        int depth = 0;
         MAIN:
         do {
             scanToken = scannerService.getNextToken();
@@ -27,74 +27,115 @@ public class ParserService {
                 continue;
             }
             ParseToken currentParseToken = parseStack.pop();
+//            if (currentParseToken.isTerminal()) {
+//                while (currentParseToken.getTerminalType().equals(TerminalType.TREEFLAG)) {
+//                    depth--;
+//                    currentParseToken = parseStack.pop();
+//                }
+//            }
+//            appendToResult(output, currentParseToken.getValue(),depth);
             while (!currentParseToken.isTerminal()) {
+                appendToResult(output, currentParseToken.getValue(), depth, currentParseToken.getLineNumber());
                 ArrayList<ParseToken> parseTokens = expand(inputParseToken, currentParseToken);
-                System.out.println(scanToken.getLineNumber()+"=>"+currentParseToken.getNonTerminalType()+"-"+scanToken + " " + inputParseToken.getTerminalType());
-                for (int i = parseStack.size() - 1; i >= 0 ; i--) {
-                    if (parseStack.get(i).isTerminal()){
+                System.out.println(scanToken.getLineNumber() + "=>" + currentParseToken.getNonTerminalType() + "-" + scanToken + " " + inputParseToken.getTerminalType());
+                for (int i = parseStack.size() - 1; i >= 0; i--) {
+                    if (parseStack.get(i).isTerminal()) {
                         System.out.print(parseStack.get(i).getTerminalType() + "-");
-                    }else{
+                    } else {
                         System.out.print(parseStack.get(i).getNonTerminalType() + "-");
                     }
                 }
                 System.out.println();
                 if (parseTokens == null) {
-                    System.out.println("00000000000000000000000000000000  Error in convert nunTerminal to termianl "+ inputParseToken.getLineNumber());
-                    continue MAIN;
+                    System.out.println(inputParseToken.getLineNumber() + "Expected another terminal. not " + inputParseToken.getValue());
+                    break MAIN;
                 } else {
+                    parseStack.push(new ParseToken(TerminalType.TREEFLAG));
+                    depth++;
                     for (int i = parseTokens.size() - 1; i >= 0; i--) {
                         parseStack.push(parseTokens.get(i));
                     }
                 }
                 currentParseToken = parseStack.pop();
             }
-            if (currentParseToken.getTerminalType() != inputParseToken.getTerminalType()){
-                System.out.println("00000000000000000000000000000  Error in terminal matches "+ inputParseToken.getLineNumber());
-            } else {
-                System.out.println(scanToken.getLineNumber()+"->"+currentParseToken.getTerminalType()+"-"+scanToken);
+            if (currentParseToken.isTerminal()) {
+                while (currentParseToken.getTerminalType().equals(TerminalType.TREEFLAG)) {
+                    depth--;
+                    currentParseToken = parseStack.pop();
+                    if (!currentParseToken.isTerminal() || parseStack.size() == 0) {
+                        continue MAIN;
+                    }
+                }
+            }
+            if (currentParseToken.getTerminalType() != inputParseToken.getTerminalType()) { //terminal mismatch
+                System.out.println(inputParseToken.getLineNumber() + ": Syntax Error! Missing " + inputParseToken.getValue());
+            } else {  //terminal match
+                System.out.println(scanToken.getLineNumber() + "->" + currentParseToken.getTerminalType() + "-" + scanToken);
+                appendToResult(output, currentParseToken.getValue(), depth, currentParseToken.getLineNumber());
             }
         } while (scanToken.getType() != TokenType.EOF);
+        return output.toString();
     }
 
-    public ParseResult parse(ScanData scanData) {
+    public ParseResult parse() {
         StringBuilder resultStringBuilder = new StringBuilder();
+        StringBuilder errorStringBuilder = new StringBuilder();
         int depth = 0;
         int scanIndex = 0;
-        ScanToken currentScanToken = getNextToken(scanData, scanIndex);
+        ScanToken currentScanToken = scannerService.getNextToken();
+        if (currentScanToken==null){
+            return new ParseResult(resultStringBuilder.toString(), errorStringBuilder.toString());
+        }
+        ParseToken inputParseToken = convertScanTokenToParseToken(currentScanToken);
         ParseToken currentParseToken;
         while (parseStack.size() > 0) {
             currentParseToken = parseStack.pop();
             if (currentParseToken.isTerminal()) {
-//                if (currentParseToken.getTerminalType().equals(TerminalType.depthFlag)) {
-//                    depth--;
-//                } else if (parserUtils.terminalValidation(currentScanToken, currentParseToken)) {
-//                    appendToResult(resultStringBuilder, currentParseToken.getTerminalType().toString(), depth);
-//                    currentScanToken = getNextToken(scanData, scanIndex);
-//                } else {//Err
-//					todo throw respective exception
-//                }
+                if (currentParseToken.getTerminalType().equals(TerminalType.TREEFLAG)) {
+                    depth--;
+                } else if ((inputParseToken.getTerminalType().equals(currentParseToken.getTerminalType()))) {
+                    appendToResult(resultStringBuilder, currentParseToken.getTerminalType().toString(), depth, inputParseToken.getLineNumber());
+                    try {
+                        currentScanToken = scannerService.getNextToken();
+                    }catch (Exception e){
+                        if (!currentParseToken.getTerminalType().equals(TerminalType.EOF)){
+                            errorStringBuilder.append(inputParseToken.getLineNumber()+": Syntax Error! Malformed Input\n");
+                        }
+                    }
+                    inputParseToken = convertScanTokenToParseToken(currentScanToken);
+                } else {//Err
+					errorStringBuilder.append(inputParseToken.getLineNumber()+": Syntax Error! Missing "+ currentParseToken.getTerminalType()+"\n");
+                }
             } else {
-//                ArrayList<ParseToken> expandResult = parserUtils.expand(currentScanToken, currentParseToken);
-//                if (expandResult == null) { //Err
-                    //todo throw respective exception
-//                } else if (expandResult.size() == 0) { //epsilon
-//                    appendToResult(resultStringBuilder, currentParseToken.getTerminalType().toString(), depth);
-//                    appendToResult(resultStringBuilder, TerminalType.eps.toString(), depth + 1);
-//                } else { //
-//                    appendToResult(resultStringBuilder, currentParseToken.getTerminalType().toString(), depth);
-//                    depth++;
-//                    parseStack.push(new ParseToken(TerminalType.depthFlag, null, 0));
-//                    for (int i = expandResult.size() - 1; i >= 0; i--) {
-//                        parseStack.push(expandResult.get(i));
-//                    }
-//                }
+                ArrayList<ParseToken> expandResult = expand(inputParseToken, currentParseToken);
+                if (expandResult == null) { //Err
+                    System.out.println(resultStringBuilder.toString());
+                    errorStringBuilder.append(inputParseToken.getLineNumber()+": Syntax Error! unexpected "+inputParseToken.getValue()+"\n");
+                    try{
+                    currentScanToken = scannerService.getNextToken();}catch (Exception e){
+                        inputParseToken = convertScanTokenToParseToken(currentScanToken);
+                        if (currentScanToken==null){
+                            return new ParseResult(resultStringBuilder.toString(), errorStringBuilder.toString());
+                        }
+                    }
+                } else if (expandResult.size() == 0) { //epsilon
+                    appendToResult(resultStringBuilder, currentParseToken.getNonTerminalType().toString(), depth, inputParseToken.getLineNumber());
+                } else { //
+                    appendToResult(resultStringBuilder, currentParseToken.getNonTerminalType().toString(), depth, inputParseToken.getLineNumber());
+                    depth++;
+                    parseStack.push(new ParseToken(TerminalType.TREEFLAG));
+                    for (int i = expandResult.size() -1 ; i >=0 ; i--) {
+                        parseStack.push(expandResult.get(i));
+                    }
+                }
             }
         }
         //write scan data one by one with line number and detect  // ??
-        return new ParseResult(resultStringBuilder.toString());
+        return new ParseResult(resultStringBuilder.toString(), errorStringBuilder.toString());
     }
 
-    private void appendToResult(StringBuilder resultStringBuilder, String token, int depth) {
+    private void appendToResult(StringBuilder resultStringBuilder, String token, int depth, int lineNumber) {
+        resultStringBuilder.append(lineNumber + ": ");
         for (int i = 0; i < depth; i++) {
             resultStringBuilder.append("|\t");
         }

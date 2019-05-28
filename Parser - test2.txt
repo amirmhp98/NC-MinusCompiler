@@ -11,7 +11,7 @@ void main(void)
 {
 	int s;
 	int w = 3;
-	if (a == 2) foo(w);
+	if a == 2) foo(w);
 	else {
 		s = [w + * -2;
 	}
