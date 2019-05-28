@@ -92,13 +92,18 @@ public class ScannerService {
 
     private static String replaceSymbolsAndWSs(String inputText) {
         String inputLine = inputText.replaceAll("(?:\\s|&nbsp;)+", " ");
+
         inputLine = inputLine.replaceAll(" +", "~");
+        inputLine = inputLine.replaceAll("==", "ج");
         for (String symbol : DataBase.getSymbols()) {
             inputLine = inputLine.replace(symbol, "~" + symbol + "~");
         }
+        inputLine = inputLine.replaceAll("ج", "==");
         inputLine = inputLine.replaceAll("~+", "~");
-        if (inputLine.charAt(0) == '~'){
-            inputLine = inputLine.substring(1);
+        if (inputLine.length() > 0){
+            if (inputLine.charAt(0) == '~'){
+                inputLine = inputLine.substring(1);
+            }
         }
         return inputLine;
     }

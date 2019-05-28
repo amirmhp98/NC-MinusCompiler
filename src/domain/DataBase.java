@@ -50,6 +50,7 @@ public class DataBase {
         symbolsTable.put("{", TerminalType.KL);
         symbolsTable.put("}", TerminalType.KR);
         symbolsTable.put("+", TerminalType.PLUS);
+        symbolsTable.put("-", TerminalType.MINUS);
         symbolsTable.put("==", TerminalType.EQ);
         symbolsTable.put("*", TerminalType.MULT);
         symbolsTable.put("=", TerminalType.ASGN);

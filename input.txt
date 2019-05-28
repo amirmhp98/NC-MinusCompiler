@@ -1,8 +1,8 @@
 void main(void){
-    int a = 0;
+    int a;
     // comment2
-    a = 2 + +2;
-    a = a + -3;
+    a = 2 + 2;
+    a = a + 3;
     cde = a;
     if (b /* comment1 */ == 3) {
         a = 3;

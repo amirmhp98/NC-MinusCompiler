@@ -29,7 +29,7 @@ public class ParserService {
             ParseToken currentParseToken = parseStack.pop();
             while (!currentParseToken.isTerminal()) {
                 ArrayList<ParseToken> parseTokens = expand(inputParseToken, currentParseToken);
-                System.out.println(scanToken.getLineNumber()+"=>"+currentParseToken.getNonTerminalType()+"-"+scanToken);
+                System.out.println(scanToken.getLineNumber()+"=>"+currentParseToken.getNonTerminalType()+"-"+scanToken + " " + inputParseToken.getTerminalType());
                 for (int i = parseStack.size() - 1; i >= 0 ; i--) {
                     if (parseStack.get(i).isTerminal()){
                         System.out.print(parseStack.get(i).getTerminalType() + "-");
@@ -39,8 +39,8 @@ public class ParserService {
                 }
                 System.out.println();
                 if (parseTokens == null) {
-                    System.out.println("Error in convert nunTerminal to termianl");
-                    break MAIN;
+                    System.out.println("00000000000000000000000000000000  Error in convert nunTerminal to termianl "+ inputParseToken.getLineNumber());
+                    continue MAIN;
                 } else {
                     for (int i = parseTokens.size() - 1; i >= 0; i--) {
                         parseStack.push(parseTokens.get(i));
@@ -49,7 +49,7 @@ public class ParserService {
                 currentParseToken = parseStack.pop();
             }
             if (currentParseToken.getTerminalType() != inputParseToken.getTerminalType()){
-                System.out.println("Error in terminal matches");
+                System.out.println("00000000000000000000000000000  Error in terminal matches "+ inputParseToken.getLineNumber());
             } else {
                 System.out.println(scanToken.getLineNumber()+"->"+currentParseToken.getTerminalType()+"-"+scanToken);
             }

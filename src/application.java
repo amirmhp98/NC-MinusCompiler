@@ -9,7 +9,7 @@ import parser.ScannerService;
 public class application {
 	private static FileIOHandler fileIOHandler = new FileIOHandler();
 	public static void main(String[] args) {
-		String fileName = "input.txt";
+		String fileName = "Parser - test2.txt";
 		FileService fileService = new FileService(fileName);
 		ScannerService scannerService = new ScannerService(fileService);
 		ParserService parserService = new ParserService(scannerService);
