@@ -3,17 +3,17 @@ package io;
 import domain.ScanError;
 import domain.ScanToken;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Created by amirmhp on 4/11/2019.
  */
 public class FileIOHandler {
 
-    private void writeIntoFile(String textToWrite, String fileName) {
+    public void writeIntoFile(String textToWrite, String fileName) {
         try {
             FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
