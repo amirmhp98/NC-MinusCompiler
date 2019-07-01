@@ -8,13 +8,6 @@ public class ScanToken {
     private String value;
     private int lineNumber;
 
-
-    public ScanToken(TokenType type, String value) {
-        this.type = type;
-        this.value = value;
-        this.lineNumber = 0;
-    }
-
     public ScanToken(TokenType type, String value, int lineNumber) {
         this.type = type;
         this.value = value;
@@ -35,10 +28,10 @@ public class ScanToken {
 
     @Override
     public String toString() {
-        return "("+
-                type.toString()+
-                ", "+
-                value+
+        return "(" +
+                type.toString() +
+                ", " +
+                value +
                 ")";
     }
 }
