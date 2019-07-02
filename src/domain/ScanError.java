@@ -6,10 +6,12 @@ package domain;
 public class ScanError {
     private String value;
     private ErrorType type;
+    private int lineNumber;
 
-    public ScanError(ErrorType type, String value) {
+    public ScanError(ErrorType type, String value, int lineNumber) {
         this.value = value;
         this.type = type;
+        this.lineNumber = lineNumber;
     }
 
     public String getValue() {
@@ -18,5 +20,18 @@ public class ScanError {
 
     public ErrorType getType() {
         return type;
+    }
+
+    public int getLineNumber() {
+        return lineNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "(" +
+                type.toString() +
+                ", " +
+                value +
+                ")";
     }
 }

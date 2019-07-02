@@ -7,15 +7,15 @@ import java.util.List;
  * Created by amirmhp on 4/11/2019.
  */
 public class ScanResult {
-    private List<ScanToken> scanTokens;
-    private List<ScanError> scanErrors;
+    private ArrayList<ScanToken> scanTokens;
+    private ArrayList<ScanError> scanErrors;
 
     public ScanResult() {
         scanTokens = new ArrayList<>();
         scanErrors = new ArrayList<>();
     }
 
-    public List<ScanToken> getScanTokens() {
+    public ArrayList<ScanToken> getScanTokens() {
         return scanTokens;
     }
 
@@ -23,7 +23,7 @@ public class ScanResult {
         this.scanTokens.add(scanToken);
     }
 
-    public List<ScanError> getScanErrors() {
+    public ArrayList<ScanError> getScanErrors() {
         return scanErrors;
     }
 
