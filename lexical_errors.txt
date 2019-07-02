@@ -1,3 +1,2 @@
-
-9.  cd!
-14.  @
+9. (INVALID_INPUT, cd!) 
+14. (INVALID_INPUT, @) 

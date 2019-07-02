@@ -9,5 +9,5 @@ public enum TokenType {
     KEYWORD,
     SYMBOL,
     EOF,
-    NOTHINGo
+    NOTHING
 }

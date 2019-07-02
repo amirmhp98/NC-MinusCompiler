@@ -12,7 +12,7 @@ public class ParserService {
     public ParserService(ScannerService scannerService) {
         this.scannerService = scannerService;
         parseStack = new Stack<>();
-        parseStack.push(new ParseToken(NonTerminalType.Program, null, 0));
+//        parseStack.push(new ParseToken(NonTerminalType.Program, null, 0));
     }
 
     public void tempRun(){
@@ -59,7 +59,7 @@ public class ParserService {
 //                    System.out.println(inputParseToken.getLineNumber() + "Expected another terminal. not " + inputParseToken.getValue());
                     break MAIN;
                 } else {
-                    parseStack.push(new ParseToken(TerminalType.TREEFLAG));
+//                    parseStack.push(new ParseToken(TerminalType.TREEFLAG));
                     depth++;
                     for (int i = parseTokens.size() - 1; i >= 0; i--) {
                         parseStack.push(parseTokens.get(i));
@@ -68,13 +68,13 @@ public class ParserService {
                 currentParseToken = parseStack.pop();
             }
             if (currentParseToken.isTerminal()) {
-                while (currentParseToken.getTerminalType().equals(TerminalType.TREEFLAG)) {
-                    depth--;
-                    currentParseToken = parseStack.pop();
-                    if (!currentParseToken.isTerminal() || parseStack.size() == 0) {
-                        continue MAIN;
-                    }
-                }
+//                while (currentParseToken.getTerminalType().equals(TerminalType.TREEFLAG)) {
+//                    depth--;
+//                    currentParseToken = parseStack.pop();
+//                    if (!currentParseToken.isTerminal() || parseStack.size() == 0) {
+//                        continue MAIN;
+//                    }
+//                }
             }
             if (currentParseToken.getTerminalType() != inputParseToken.getTerminalType()) { //terminal mismatch
 //                System.out.println(inputParseToken.getLineNumber() + ": Syntax Error! Missing " + inputParseToken.getValue());
@@ -100,7 +100,8 @@ public class ParserService {
         while (parseStack.size() > 0) {
             currentParseToken = parseStack.pop();
             if (currentParseToken.isTerminal()) {
-                if (currentParseToken.getTerminalType().equals(TerminalType.TREEFLAG)) {
+//                if (currentParseToken.getTerminalType().equals(TerminalType.TREEFLAG)) {
+                if (currentParseToken.getTerminalType().equals(TerminalType.MINUS)) {
                     depth--;
                 } else if ((inputParseToken.getTerminalType().equals(currentParseToken.getTerminalType()))) {
                     appendToResult(resultStringBuilder, currentParseToken.getTerminalType().toString(), depth, inputParseToken.getLineNumber());
@@ -132,7 +133,8 @@ public class ParserService {
                 } else { //
                     appendToResult(resultStringBuilder, currentParseToken.getNonTerminalType().toString(), depth, inputParseToken.getLineNumber());
                     depth++;
-                    parseStack.push(new ParseToken(TerminalType.TREEFLAG));
+//                    parseStack.push(new ParseToken(TerminalType.TREEFLAG));
+                    parseStack.push(new ParseToken(TerminalType.MINUS));
                     for (int i = expandResult.size() -1 ; i >=0 ; i--) {
                         parseStack.push(expandResult.get(i));
                     }

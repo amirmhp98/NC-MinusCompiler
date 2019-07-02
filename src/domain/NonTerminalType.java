@@ -1,9 +1,6 @@
 package domain;
 
 public enum NonTerminalType {
-    Program, Declarationlist, E1, E2, Compoundstmt, Statementlist, Statement, Expressionstmt, Selectionstmt, Iterationstmt,
-    Returnstmt, E3, Switchstmt, Casestmts, Casestmt, Defaultstmt, Expression, EXEXEX, EZEZEZ, NewSimpleexpression,
-    E5, Relop, Additiveexpression, NewAdditiveexpression, F2, Addop, Term, NewTerm, F3, NewSignedfactor, Signedfactor,
-    Args, Arglist, F4, NewFactor, Factor, NewVarcall, Varcall, Typespecifier, Params, BB, Paramlist, F1,
-    Declaration, AA, Vardeclaration, Fundeclaration
+    P, DL, D, TS, VDFD, VD, FD, PARS, VPAR, PL, BRCK, CS, SL, S, ES, SS, IS, RS, RVAL, SWS, CASS, DS, E, EID,
+    EID1, SE1, AE, AE1, A, R, T, T1, SF, SF1, F, F1, VC, VC1, VC2, ARGS, ARL, ARL1
 }
