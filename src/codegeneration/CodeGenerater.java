@@ -7,6 +7,7 @@ import domain.codeGeneration.CJTemporaryVariable;
 import domain.exception.semanticException.AlreadyDefinedException;
 import domain.exception.semanticException.ScopingException;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

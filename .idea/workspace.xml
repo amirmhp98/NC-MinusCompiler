@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd402825-6b66-45cc-a8f7-fb1888375ba7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/codegeneration/CodeGenerater.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/codeGeneration/ActionSymbol.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/codeGeneration/ActiveRecord.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/codeGeneration/CJTemporaryVariable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/exception/SemanticException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/exception/semanticException/AlreadyDefinedException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/exception/semanticException/ArgumentMismatchingException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/exception/semanticException/NoLoopReferenceException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/exception/semanticException/ScopingException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/exception/semanticException/TypeMismatchException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/exception/semanticException/VarVoidingException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/domain/TokenType.java" afterPath="$PROJECT_DIR$/src/domain/TokenType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codegeneration/CodeGenerater.java" afterPath="$PROJECT_DIR$/src/codegeneration/CodeGenerater.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +22,8 @@
       <file leaf-file-name="CodeGenerater.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/codegeneration/CodeGenerater.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="24" column="49" lean-forward="false" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+            <state relative-caret-position="378">
+              <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -110,7 +98,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="parseCore2" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RESET_MODE" value="HARD" />
@@ -349,6 +337,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NC-Minus Compiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NC-Minus Compiler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -358,10 +360,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="SearchEverywhereHistoryKey" value="DB&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/domain/DataBase.java&#10;هخ&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/io/FileIOHandler.java&#10;IO&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/application.java&#10;Token&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/domain/Token.java&#10;App&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/application.java" />
+    <property name="SearchEverywhereHistoryKey" value="Dat&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/domain/DataBase.java&#10;DB&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/domain/DataBase.java&#10;هخ&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/io/FileIOHandler.java&#10;IO&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/application.java&#10;Token&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/domain/Token.java&#10;App&#9;FILE&#9;file://D:/code/NC-Minus Compiler/src/application.java" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="D:/Uni/Compiler/Project/MahdisGolpaSrc" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -386,18 +389,13 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/misc.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/application.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/lexical_errors.txt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/lexical_scans.txt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/DataBase.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/NonTerminalType.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/ParseResult.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/ParseToken.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/ScanError.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/ScanResult.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/ScanToken.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/TerminalType.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/io/FileIOHandler.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/TokenType.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/parser/ParserService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/parser/ScannerService.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -405,12 +403,8 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Grammar.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/DataBase.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/FileToken.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/ScanFinalResult.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/parser/FileService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/parser/GrammarService.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/TransitionDiagram.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/TransitionState.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -418,9 +412,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domain/FinalResult.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/parser/ParserUtils.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/parser/ScannerUtils.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -975,7 +966,7 @@
       <workItem from="1559042583674" duration="10960000" />
       <workItem from="1559456665578" duration="14000" />
       <workItem from="1562004388153" duration="640000" />
-      <workItem from="1562045902990" duration="13461000" />
+      <workItem from="1562045902990" duration="17269000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit.&#10;just structured.">
       <created>1554984520324</created>
@@ -1075,11 +1066,18 @@
       <option name="project" value="LOCAL" />
       <updated>1562004935805</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="ready for action routines.">
+      <created>1562067336735</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1562067336735</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59674000" />
+    <option name="totallyTimeSpent" value="63482000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1102,7 +1100,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946634" sideWeight="0.5021482" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32830626" sideWeight="0.49785176" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32830626" sideWeight="0.49785176" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946634" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946634" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1195,14 +1193,15 @@
     <MESSAGE value="Before present" />
     <MESSAGE value="Before present(2)&#10;" />
     <MESSAGE value="fix shits" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix shits" />
+    <MESSAGE value="ready for action routines." />
+    <option name="LAST_COMMIT_MESSAGE" value="ready for action routines." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/parser/ParserService.java</url>
-          <line>188</line>
+          <line>190</line>
           <properties />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
@@ -1216,14 +1215,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/io/FileIOHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/parser/ParserUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -1314,7 +1305,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/domain/DataBase.java" />
     <entry file="file://$PROJECT_DIR$/src/parser/ScannerService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
@@ -1447,7 +1437,7 @@
           <caret line="25" column="24" lean-forward="false" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
           <folding>
             <element signature="method#run#0;class#ParserService#0" expanded="false" />
-            <marker date="1562045927903" expanded="true" signature="9473:9480" ph="{...}" />
+            <marker date="1562071211221" expanded="true" signature="9654:9661" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1567,10 +1557,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/domain/DataBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/codegeneration/CodeGenerater.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="24" column="49" lean-forward="false" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+        <state relative-caret-position="378">
+          <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
