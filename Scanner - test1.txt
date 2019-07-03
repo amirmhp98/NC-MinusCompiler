@@ -1,0 +1,30 @@
+int foo1(int c){
+	int b;
+	int foo2(int d) {
+		if (d < 2) {
+			d = d + 1;		
+		} else {
+			d = d + 2;
+		}
+		return d;
+	}
+	b = 3;
+	b = foo2(b - 1) + foo2(b + 1);
+	return b;
+}
+int a;
+void main(void) {
+	a = 3;
+	while (0 < a) {
+		switch (a) {
+			case 1:
+				a = foo1(a);
+			case 2:{
+				a = foo1(a + 1);
+				break;
+			}
+		}
+		a = a - 1;
+	}
+	return;
+}
