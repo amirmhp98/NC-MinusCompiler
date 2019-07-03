@@ -1684,7 +1684,7 @@ public class DataBase {
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
                 break;
             case D:
-                transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.TS, "1"));
+                transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.TS, "1," + LabelType.PID));
                 transitionDiagram.addTransitionState(new TransitionState(1, TerminalType.ID, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(2, NonTerminalType.VDFD, "3"));
                 transitionDiagram.addTransitionState(new TransitionState(3, true));
