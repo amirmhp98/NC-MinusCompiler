@@ -34,6 +34,9 @@ public class CodeGenerater {
         activeRecords.add(activeRecord);
     }
 
+    public Code[] getCodes (){
+        return code;
+    }
 
     public void handleRoutine(ActionSymbol actionSymbol, ScanToken input) {
         switch (actionSymbol) {
@@ -277,7 +280,7 @@ public class CodeGenerater {
     }
 
     private void do_getarr(){
-        int exactAddress ;
+        int exactAddress =
     }
 
 }
