@@ -170,13 +170,16 @@ public class CodeGenerater {
     private void do_funjpcaller() { //todo move this to return
         Function function = functionTable.get(functionTable.size() - 1);
         function.setAddressOfReturnCode(codePointer);
+        if (function.getName().toLowerCase().equals("name"))
+            return;
+
         Code retCode = new Code(Instruction.JP, data[data[function.getReturnSpecifierAddress()].getValue()].getValue() + ""
                 , "", "");
         code[codePointer] = retCode;
         if (function.getReturnType().equals(DataType.INT)) {
             Data retData = new Data(DataType.INT);
             retData.setAddress(function.getAddressOfReturnValue());
-            retData.setValue(ss.remove(ss.size()-1));
+            retData.setValue(ss.remove(ss.size() - 1));
             data[function.getAddressOfReturnValue()] = retData;
         }
     }
@@ -217,6 +220,23 @@ public class CodeGenerater {
         //todo do nothing :)
     }
 
+    private void do_if_save() {
+        ss.add(codePointer);
+        codePointer++;
+    }
+
+    private void do_jp_save() {
+        code[ss.get(ss.size() - 1)] = new Code(Instruction.JPF, ss.get(ss.size() - 2).toString(), codePointer + "", "");
+        ss.remove(ss.size() - 1);
+        ss.remove(ss.size() - 1);
+        ss.add(codePointer);
+        codePointer++;
+    }
+
+    private void do_end_if() {
+        code[ss.get(ss.size() - 1)] = new Code(Instruction.JP, codePointer + "", "", "");
+        ss.remove(ss.size() - 1);
+    }
 
 
 

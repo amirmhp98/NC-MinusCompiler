@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd402825-6b66-45cc-a8f7-fb1888375ba7" name="Default" comment="&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/codeGeneration/Function.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/domain/codeGeneration/Instruction.java" />
+    <list default="true" id="bd402825-6b66-45cc-a8f7-fb1888375ba7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/codegeneration/CodeGenerater.java" afterPath="$PROJECT_DIR$/src/codegeneration/CodeGenerater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/domain/codeGeneration/Code.java" afterPath="$PROJECT_DIR$/src/domain/codeGeneration/Code.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/domain/codeGeneration/Data.java" afterPath="$PROJECT_DIR$/src/domain/codeGeneration/Data.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,8 +22,8 @@
       <file leaf-file-name="CodeGenerater.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/codegeneration/CodeGenerater.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="210" column="0" lean-forward="true" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+            <state relative-caret-position="604">
+              <caret line="240" column="4" lean-forward="false" selection-start-line="240" selection-start-column="4" selection-end-line="240" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3266#3267#0" expanded="true" />
@@ -944,7 +940,7 @@
       <workItem from="1559456665578" duration="14000" />
       <workItem from="1562004388153" duration="640000" />
       <workItem from="1562045902990" duration="18433000" />
-      <workItem from="1562075816526" duration="15387000" />
+      <workItem from="1562075816526" duration="16339000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit.&#10;just structured.">
       <created>1554984520324</created>
@@ -1065,11 +1061,18 @@
       <option name="project" value="LOCAL" />
       <updated>1562083592825</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="committt">
+      <created>1562119303687</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1562119303687</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80033000" />
+    <option name="totallyTimeSpent" value="80985000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1188,7 +1191,8 @@
     <MESSAGE value="ready for action routines." />
     <MESSAGE value="after merge&#10;" />
     <MESSAGE value="working on routines" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on routines" />
+    <MESSAGE value="committt" />
+    <option name="LAST_COMMIT_MESSAGE" value="committt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1601,8 +1605,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/codegeneration/CodeGenerater.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="210" column="0" lean-forward="true" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
+        <state relative-caret-position="604">
+          <caret line="240" column="4" lean-forward="false" selection-start-line="240" selection-start-column="4" selection-end-line="240" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3266#3267#0" expanded="true" />
