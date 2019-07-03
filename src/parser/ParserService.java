@@ -3,6 +3,7 @@ package parser;
 import domain.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 
 public class ParserService {
@@ -17,36 +18,91 @@ public class ParserService {
 
     public void tempRun() {
         ScanToken scanToken;
+        MAIN:
         do {
             scanToken = scannerService.getNextToken();
             ParseToken inputParseToken = convertScanTokenToParseToken(scanToken);
             if (inputParseToken == null) {
                 return;
             }
-            System.out.println("scanToken = " + scanToken);
+            System.out.println("-------------------------");
+            System.out.println("scanToken = " + scanToken + " and top stack is: " + lastTransitionDiagram().getName() + " " + lastTransitionDiagram().getCurrentState());
             while (true) {
                 String output = lastTransitionDiagram().containTerminal(inputParseToken);
                 if (output != null) {
                     // todo see output for label
                     String[] outputs = output.split(",");
+                    System.out.println("Change " + lastTransitionDiagram().getName() + " state to " + output);
                     for (int i = 0; i < outputs.length; i++) {
                         try {
                             int newState = Integer.parseInt(outputs[i]);
                             lastTransitionDiagram().setCurrentState(newState);
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.getStackTrace();
                         }
                     }
                     break;
                 }
-                NonTerminalType nonTerminalType = lastTransitionDiagram().containNonTerminal(inputParseToken);
-                if (nonTerminalType == null){
-                    System.out.println("Errorrrrr.");
-                    break;
-                } else {
-                    parseStack.push(DataBase.makeTransitionDiagram(nonTerminalType));
-                }
+                HashMap.Entry<NonTerminalType, String> nonTerminalType = lastTransitionDiagram().containNonTerminal(inputParseToken);
+                if (nonTerminalType == null) {
+                    if (inputParseToken.getTerminalType() == TerminalType.EOF) {
+                        System.out.println("Syntax Error! Malformed Input");
+                        break MAIN;
+                    } else if (lastTransitionDiagram().haveTerminalWay() != null) {
+                        System.out.println(inputParseToken.getLineNumber() + " : Syntax Error! Missing " + lastTransitionDiagram().haveTerminalWay());
+                        continue MAIN;
+                    } else if (lastTransitionDiagram().haveNonTerminalWay() != null) {
+                        System.out.println(inputParseToken.getLineNumber() + " : Syntax Error! Unexpected " + inputParseToken.getTerminalType());
 
+                        if (DataBase.IsInFollow(lastTransitionDiagram().getName(), inputParseToken.getTerminalType()) &&
+                                !DataBase.IsInFirst(lastTransitionDiagram().getName(), TerminalType.EPSILON)) {
+                            System.out.println(inputParseToken.getLineNumber() + " : Syntax Error! Missing " + lastTransitionDiagram().getName());
+                            parseStack.pop();
+                        }
+                        continue MAIN;
+                    } else {
+                        break;
+                    }
+                } else {
+                    NonTerminalType lastNonTerminalType = lastTransitionDiagram().getName();
+                    // todo see output for label
+                    String[] outputs = nonTerminalType.getValue().split(",");
+                    for (int i = 0; i < outputs.length; i++) {
+                        try {
+                            int newState = Integer.parseInt(outputs[i]);
+                            lastTransitionDiagram().setCurrentState(newState);
+                        } catch (Exception e) {
+                            e.getStackTrace();
+                        }
+                    }
+                    parseStack.push(DataBase.makeTransitionDiagram(nonTerminalType.getKey()));
+                    System.out.println(lastNonTerminalType + " (" + inputParseToken.getTerminalType() + ") -> " + lastTransitionDiagram().getName());
+                    if (lastTransitionDiagram().checkEpsilon(inputParseToken)) {
+                        System.out.println("Go to end of state by epsilon.");
+                    }
+                }
+                while (true) {
+                    if (lastTransitionDiagram().isInEnd()) {
+                        System.out.println(lastTransitionDiagram().getName() + " inner popped and end.");
+                        parseStack.pop();
+                        if (parseStack.size() == 0) {
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            while (true) {
+                if (lastTransitionDiagram().isInEnd()) {
+                    System.out.println(lastTransitionDiagram().getName() + " popped and end.");
+                    parseStack.pop();
+                    if (parseStack.size() == 0) {
+                        break;
+                    }
+                } else {
+                    break;
+                }
             }
 
         } while (scanToken.getType() != TokenType.EOF);

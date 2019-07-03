@@ -75,12 +75,16 @@ public class TransitionState {
         return terminalTypeStates;
     }
 
-    public NonTerminalType containsNonTerminal(TerminalType terminalType) {
+    public HashMap.Entry<NonTerminalType, String> containsNonTerminal(TerminalType terminalType) {
         for (HashMap.Entry<NonTerminalType, String> entry : nonTerminalTypeStates.entrySet()) {
             if (DataBase.IsInFirstFollow(entry.getKey(), terminalType)){
-                return entry.getKey();
+                return entry;
             }
         }
         return null;
+    }
+
+    public boolean isEnd() {
+        return isEnd;
     }
 }

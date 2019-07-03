@@ -1971,13 +1971,23 @@ public class DataBase {
         return transitionDiagram;
     }
 
-    public static boolean IsInFirstFollow(NonTerminalType nonTerminalType, TerminalType terminalType){
-        if (first.get(nonTerminalType).contains(terminalType)){
+    public static boolean IsInFirstFollow(NonTerminalType nonTerminalType, TerminalType terminalType) {
+        if (first.get(nonTerminalType).contains(terminalType)) {
             return true;
         }
-        if (first.get(nonTerminalType).contains(TerminalType.EPSILON)){
+        if (first.get(nonTerminalType).contains(TerminalType.EPSILON)) {
             return follow.get(nonTerminalType).contains(terminalType);
         }
         return false;
     }
+
+    public static boolean IsInFirst(NonTerminalType nonTerminalType, TerminalType terminalType) {
+        return first.get(nonTerminalType).contains(terminalType);
+    }
+
+    public static boolean IsInFollow(NonTerminalType nonTerminalType, TerminalType terminalType) {
+        return follow.get(nonTerminalType).contains(terminalType);
+    }
+
+
 }
