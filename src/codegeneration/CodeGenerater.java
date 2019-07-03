@@ -34,7 +34,7 @@ public class CodeGenerater {
         activeRecords.add(activeRecord);
     }
 
-    public Code[] getCodes (){
+    public Code[] getCodes() {
         return code;
     }
 
@@ -259,17 +259,17 @@ public class CodeGenerater {
         ss.remove(ss.size() - 1);
     }
 
-    private void do_symbol(String input){
-        if (input.equals("output")){
+    private void do_symbol(String input) {
+        if (input.equals("output")) {
             //todo implement
         }
         String key = currentActiveRecord + "." + input;
-        if (symbolTable.containsKey(key)){ //pointing to a valid var
+        if (symbolTable.containsKey(key)) { //pointing to a valid var
             ss.add(symbolTable.get(key).getAddress());
-        }else if(symbolTable.containsKey(input)) {//pointing to a valid func
+        } else if (symbolTable.containsKey(input)) {//pointing to a valid func
             int functionIndex = 0;
             for (int i = 0; i < functionTable.size(); i++) {
-                if (functionTable.get(i).getName().equals(input)){
+                if (functionTable.get(i).getName().equals(input)) {
                     functionIndex = i;
                     break;
                 }
@@ -279,8 +279,14 @@ public class CodeGenerater {
         }
     }
 
-    private void do_getarr(){
-        int exactAddress =
+    private void do_getarr() {
+        int tempAdr = ss.get(ss.size() - 1);  //havaaset vashe harja mikhay bara index e array num push koni manfi push kon.
+        int offset;
+        if (tempAdr < 0) offset = tempAdr * (-1);
+        else {
+            offset = data[tempAdr].getValue();
+        }
+        int address ;
     }
 
 }
