@@ -4,6 +4,7 @@ import domain.ScanToken;
 import domain.codeGeneration.*;
 import domain.exception.semanticException.AlreadyDefinedException;
 import domain.exception.semanticException.ScopingException;
+import domain.exception.semanticException.VarVoidingException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class CodeGenerater {
     private List<Integer> ss = new ArrayList<>();
     private String tempNameHolder = "";
     private DataType tempTypeHolder = DataType.INT;
+    private List<Function> functionTable = new ArrayList<>();
 
     {
         ActiveRecord activeRecord = new ActiveRecord();
@@ -44,7 +46,7 @@ public class CodeGenerater {
 
     private Data getTemp() {
         Data temp = new Data(DataType.INT);
-        temp.setIndex(tempPointer);
+        temp.setAddress(tempPointer);
         data[tempPointer] = temp;
         tempPointer--;
         return temp;
@@ -66,15 +68,6 @@ public class CodeGenerater {
         return symbolTable.get(key).getAddress();
     }
 
-
-    private int defineFunc(String name) throws AlreadyDefinedException {
-        String key = currentActiveRecord + "." + name;
-        if (symbolTable.containsKey(key)) {
-            throw new AlreadyDefinedException(name);
-        }
-        symbolTable.put(key, new SymbolRecord(codePointer, IDType.FUNC));
-        return codePointer;
-    }
 
     private ActiveRecord deleteActiveRecord() { //hengaame return kardan
         ActiveRecord toBeDeletedAR = activeRecords.get(activeRecords.size() - 1);
@@ -117,13 +110,17 @@ public class CodeGenerater {
         }
     }
 
-    private int do_vardec() throws AlreadyDefinedException { //only int.
+    private int do_vardec() throws AlreadyDefinedException, VarVoidingException { //only int.
         String key = currentActiveRecord + "." + tempNameHolder;
+        if (tempTypeHolder.equals(DataType.VOID)) {
+            throw new VarVoidingException();
+        }
         if (symbolTable.containsKey(key)) {
             throw new AlreadyDefinedException(tempNameHolder);
         }
         symbolTable.put(key, new SymbolRecord(varPointer, IDType.INT));
         data[varPointer] = new Data(DataType.INT);
+        data[varPointer].setAddress(varPointer);
         varPointer++;
         return varPointer - 1;
     }
@@ -137,14 +134,107 @@ public class CodeGenerater {
         symbolTable.put(key, new SymbolRecord(varPointer, IDType.ARR));
         for (int i = 0; i < count; i++) {
             data[varPointer + i] = new Data(DataType.INT);
+            data[varPointer + i].setAddress(varPointer + i);
         }
         varPointer += count;
         return varPointer - count;
     }
 
-    private void do_fundec()  {
+    private void do_fundec() throws AlreadyDefinedException {
+        if (symbolTable.containsKey(tempNameHolder)) {
+            throw new AlreadyDefinedException(tempNameHolder);
+        }
+        Function function = new Function();
+        function.setName(tempNameHolder);
+        function.setReturnType(tempTypeHolder);
+        if (function.getReturnType().equals(DataType.INT)) {
+            function.setAddressOfReturnValue(getTemp().getAddress());
+        }
+        function.setReturnPlaceSpecifierAddress(getTemp().getAddress());
+        functionTable.add(function);
+        function.setIndex(functionTable.size() - 1);
+        symbolTable.put(function.getName(), new SymbolRecord(function.getIndex(), IDType.FUNC));
+
+        ActiveRecord activeRecord = new ActiveRecord();
+        activeRecord.setParentARIndex(currentActiveRecord);
+        activeRecord.setIndex(activeRecords.size());
+        activeRecords.add(activeRecord);
+        currentActiveRecord = activeRecord.indexOf();
 
     }
 
+    private void do_funendpars() {
+        functionTable.get(functionTable.size() - 1).setCodePointer(codePointer);
+    }
+
+    private void do_funjpcaller() { //todo move this to return
+        Function function = functionTable.get(functionTable.size() - 1);
+        function.setAddressOfReturnCode(codePointer);
+        Code retCode = new Code(Instruction.JP, data[data[function.getReturnSpecifierAddress()].getValue()].getValue() + ""
+                , "", "");
+        code[codePointer] = retCode;
+        if (function.getReturnType().equals(DataType.INT)) {
+            Data retData = new Data(DataType.INT);
+            retData.setAddress(function.getAddressOfReturnValue());
+            retData.setValue(ss.remove(ss.size()-1));
+            data[function.getAddressOfReturnValue()] = retData;
+        }
+    }
+
+    private void do_parid(String input) {
+        tempNameHolder = input;
+        tempTypeHolder = DataType.INT;
+    }
+
+    private void do_withoutbrck() {
+        String key = currentActiveRecord + "." + tempNameHolder;
+        symbolTable.put(key, new SymbolRecord(varPointer, IDType.INT));
+        data[varPointer] = new Data(DataType.INT);
+        data[varPointer].setAddress(varPointer);
+        Function function = functionTable.get(functionTable.size() - 1);
+        function.getArgs().add(data[varPointer]);
+        varPointer++;
+    }
+
+    private void do_withbrck() {
+        String key = currentActiveRecord + "." + tempNameHolder;
+        symbolTable.put(key, new SymbolRecord(varPointer, IDType.ARR));
+        data[varPointer] = new Data(DataType.PTR);
+        data[varPointer].setAddress(varPointer);
+        Function function = functionTable.get(functionTable.size() - 1);
+        function.getArgs().add(data[varPointer]);
+    }
+
+    private void do_voidparerr() throws VarVoidingException {
+        throw new VarVoidingException();
+    }
+
+    private void do_singlevoidpar() {
+
+    }
+
+    private void do_return() {
+        //todo do nothing :)
+    }
+
+
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

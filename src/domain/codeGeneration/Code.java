@@ -4,27 +4,36 @@ package domain.codeGeneration;
  * Created by amirmhp on 7/2/2019.
  */
 public class Code {
-    private String func = "";
+    private Instruction instruction;
     private String arg1 = "";
     private String arg2 = "";
     private String arg3 = "";
 
+    @Override
+    public String toString() {
+        return "(" +
+                instruction + "," +
+                arg1 + "," +
+                arg2 + "," +
+                arg3 + ")";
+    }
+
     public Code() {
     }
 
-    public Code(String func, String arg1, String arg2, String arg3) {
-        this.func = func;
+    public Code(Instruction instruction, String arg1, String arg2, String arg3) {
+        this.instruction = instruction;
         this.arg1 = arg1;
         this.arg2 = arg2;
         this.arg3 = arg3;
     }
 
-    public String getFunc() {
-        return func;
+    public Instruction getInstruction() {
+        return instruction;
     }
 
-    public void setFunc(String func) {
-        this.func = func;
+    public void setInstruction(Instruction instruction) {
+        this.instruction = instruction;
     }
 
     public String getArg1() {

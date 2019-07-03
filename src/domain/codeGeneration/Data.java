@@ -6,18 +6,18 @@ package domain.codeGeneration;
 public class Data {
     private DataType dataType;
     private int value;
-    private int index;
+    private int address;
 
     public Data(DataType dataType) {
         this.dataType = dataType;
     }
 
-    public int getIndex() {
-        return index;
+    public int getAddress() {
+        return address;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setAddress(int address) {
+        this.address = address;
     }
 
     public DataType getDataType() {
