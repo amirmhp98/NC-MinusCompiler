@@ -238,7 +238,47 @@ public class CodeGenerater {
         ss.remove(ss.size() - 1);
     }
 
+    private void do_wh_label() {
+        ss.add(codePointer);
+    }
 
+    private void do_wh_save() {
+        ss.add(codePointer);
+        codePointer++;
+    }
+
+    private void do_endwh() {
+        code[codePointer] = new Code(Instruction.JP, ss.get(ss.size() - 3).toString(), "", "");
+        codePointer++;
+        code[ss.get(ss.size() - 1)] = new Code(Instruction.JPF, ss.get(ss.size() - 2).toString(), codePointer + "", "");
+        ss.remove(ss.size() - 1);
+        ss.remove(ss.size() - 1);
+        ss.remove(ss.size() - 1);
+    }
+
+    private void do_symbol(String input){
+        if (input.equals("output")){
+            //todo implement
+        }
+        String key = currentActiveRecord + "." + input;
+        if (symbolTable.containsKey(key)){ //pointing to a valid var
+            ss.add(symbolTable.get(key).getAddress());
+        }else if(symbolTable.containsKey(input)) {//pointing to a valid func
+            int functionIndex = 0;
+            for (int i = 0; i < functionTable.size(); i++) {
+                if (functionTable.get(i).getName().equals(input)){
+                    functionIndex = i;
+                    break;
+                }
+            }
+            ss.add(functionIndex);
+            ss.add(-9990); //for correct pop
+        }
+    }
+
+    private void do_getarr(){
+        int exactAddress ;
+    }
 
 }
 
