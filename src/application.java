@@ -12,7 +12,7 @@ public class application {
 
     public static void main(String[] args) {
         GrammarService grammarService = new GrammarService("Grammar.txt");
-        String fileName = "input.txt";
+        String fileName = "Parser - test1.txt";
         FileService fileService = new FileService(fileName);
         ScannerService scannerService = new ScannerService(fileService);
         ParserService parserService = new ParserService(scannerService);
