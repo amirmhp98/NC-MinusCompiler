@@ -1,5 +1,6 @@
 package codegeneration;
 
+import domain.LabelType;
 import domain.ScanToken;
 import domain.codeGeneration.*;
 import domain.exception.semanticException.AlreadyDefinedException;
@@ -38,12 +39,89 @@ public class CodeGenerater {
         return code;
     }
 
-    public void handleRoutine(ActionSymbol actionSymbol, ScanToken input) {
+    public void handleRoutine(LabelType actionSymbol, ScanToken input) {
         switch (actionSymbol) {
-            case pid:
-
+            case PID:
+                this.do_pid(input.getValue());
                 break;
-            default:
+            case ASSIGN:
+                break;
+            case EQ:
+                break;
+            case NUM:
+                break;
+            case PLUS:
+                break;
+            case BREAK:
+                break;
+            case MINUS:
+                break;
+            case RETURN:
+                break;
+            case SYMBOL:
+                break;
+            case CONTINUE:
+                break;
+            case LT:
+                break;
+            case ENDIF:
+                break;
+            case ENDWH:
+                break;
+            case FMULT:
+                break;
+            case PARID:
+                break;
+            case TSINT:
+                break;
+            case ARRDEC:
+                break;
+            case FMINUS:
+                break;
+            case FUNDEC:
+                break;
+            case GETARR:
+                break;
+            case LTOREQ:
+                break;
+            case PLORMI:
+                break;
+            case SETPAR:
+                break;
+            case TSVOID:
+                break;
+            case VARDEC:
+                break;
+            case FUNCALL:
+                break;
+            case IF_SAVE:
+                break;
+            case JP_SAVE:
+                break;
+            case WH_SAVE:
+                break;
+            case COUNTARG:
+                break;
+            case WH_LABEL:
+                break;
+            case WITHBRCK:
+                break;
+            case FUNCALLJP:
+                break;
+            case FUNENDPARS:
+                break;
+            case VOIDPARERR:
+                break;
+            case VOIDRETURN:
+                break;
+            case ZEROARGNUM:
+                break;
+            case FUNJPCALLER:
+                break;
+            case WITHOUTBRCK:
+                break;
+            case SINGLEVOIDPAR:
+                break;
         }
     }
 

@@ -1732,16 +1732,16 @@ public class DataBase {
                 break;
             case PL:
                 transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.COMMA, LabelType.SETPAR + ",1"));
-                transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, "5");
+                transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, LabelType.SETPAR + ",5");
                 transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.TS, "2"));
-                transitionDiagram.addTransitionState(new TransitionState(2, TerminalType.ID, "3"));
+                transitionDiagram.addTransitionState(new TransitionState(2, TerminalType.ID, LabelType.PARID + ",3"));
                 transitionDiagram.addTransitionState(new TransitionState(3, NonTerminalType.BRCK, "4"));
                 transitionDiagram.addTransitionState(new TransitionState(4, NonTerminalType.PL, "5"));
                 transitionDiagram.addTransitionState(new TransitionState(5, true));
                 break;
             case BRCK:
-                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.BL, "1"));
-                transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, "2");
+                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.BL, LabelType.WITHBRCK + ",1"));
+                transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, LabelType.WITHOUTBRCK + ",2");
                 transitionDiagram.addTransitionState(new TransitionState(1, TerminalType.BR, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
                 break;
@@ -1770,8 +1770,8 @@ public class DataBase {
                 break;
             case ES:
                 transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.E, "1"));
-                transitionDiagram.getLastTransitionStates().addState(TerminalType.CONTINUE, "1");
-                transitionDiagram.getLastTransitionStates().addState(TerminalType.BREAK, "1");
+                transitionDiagram.getLastTransitionStates().addState(TerminalType.CONTINUE, "1," + LabelType.CONTINUE);
+                transitionDiagram.getLastTransitionStates().addState(TerminalType.BREAK, "1" + LabelType.BREAK);
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.SEMICOLON, "2");
                 transitionDiagram.addTransitionState(new TransitionState(1, TerminalType.SEMICOLON, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
@@ -1780,18 +1780,18 @@ public class DataBase {
                 transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.IF, "1"));
                 transitionDiagram.addTransitionState(new TransitionState(1, TerminalType.PL, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(2, NonTerminalType.E, "3"));
-                transitionDiagram.addTransitionState(new TransitionState(3, TerminalType.PR, "4"));
+                transitionDiagram.addTransitionState(new TransitionState(3, TerminalType.PR, "4," + LabelType.IF_SAVE));
                 transitionDiagram.addTransitionState(new TransitionState(4, NonTerminalType.S, "5"));
-                transitionDiagram.addTransitionState(new TransitionState(5, TerminalType.ELSE, "6"));
-                transitionDiagram.addTransitionState(new TransitionState(6, NonTerminalType.S, "7"));
+                transitionDiagram.addTransitionState(new TransitionState(5, TerminalType.ELSE, "6," + LabelType.JP_SAVE));
+                transitionDiagram.addTransitionState(new TransitionState(6, NonTerminalType.S, "7," + LabelType.ENDIF));
                 transitionDiagram.addTransitionState(new TransitionState(7, true));
                 break;
             case IS:
                 transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.WHILE, "1"));
-                transitionDiagram.addTransitionState(new TransitionState(1, TerminalType.PL, "2"));
+                transitionDiagram.addTransitionState(new TransitionState(1, TerminalType.PL, "2," + LabelType.WH_LABEL));
                 transitionDiagram.addTransitionState(new TransitionState(2, NonTerminalType.E, "3"));
-                transitionDiagram.addTransitionState(new TransitionState(3, TerminalType.PR, "4"));
-                transitionDiagram.addTransitionState(new TransitionState(4, NonTerminalType.S, "5"));
+                transitionDiagram.addTransitionState(new TransitionState(3, TerminalType.PR, "4," + LabelType.WH_SAVE));
+                transitionDiagram.addTransitionState(new TransitionState(4, NonTerminalType.S, "5," + LabelType.ENDWH));
                 transitionDiagram.addTransitionState(new TransitionState(5, true));
                 break;
             case RS:
@@ -1800,8 +1800,8 @@ public class DataBase {
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
                 break;
             case RVAL:
-                transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.E, "1"));
-                transitionDiagram.getLastTransitionStates().addState(TerminalType.SEMICOLON, "2");
+                transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.E, "1," + LabelType.RETURN));
+                transitionDiagram.getLastTransitionStates().addState(TerminalType.SEMICOLON, LabelType.VOIDRETURN + ",2");
                 transitionDiagram.addTransitionState(new TransitionState(1, TerminalType.SEMICOLON, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
                 break;
@@ -1833,7 +1833,7 @@ public class DataBase {
                 transitionDiagram.addTransitionState(new TransitionState(3, true));
                 break;
             case E:
-                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.ID, "1"));
+                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.ID, LabelType.SYMBOL + ",1"));
                 transitionDiagram.getLastTransitionStates().addState(NonTerminalType.SF1, "3");
                 transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.EID, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(3, NonTerminalType.T1, "4"));
@@ -1845,19 +1845,19 @@ public class DataBase {
                 transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.ASSIGN, "1"));
                 transitionDiagram.getLastTransitionStates().addState(NonTerminalType.VC2, "3");
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.BL, "6");
-                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.E, "2"));
+                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.E, "2," + LabelType.ASSIGN));
                 transitionDiagram.addTransitionState(new TransitionState(3, NonTerminalType.T1, "4"));
                 transitionDiagram.addTransitionState(new TransitionState(4, NonTerminalType.AE1, "5"));
                 transitionDiagram.addTransitionState(new TransitionState(5, NonTerminalType.SE1, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(6, NonTerminalType.E, "7"));
-                transitionDiagram.addTransitionState(new TransitionState(7, TerminalType.BR, "8"));
+                transitionDiagram.addTransitionState(new TransitionState(7, TerminalType.BR, "8," + LabelType.GETARR));
                 transitionDiagram.addTransitionState(new TransitionState(8, NonTerminalType.EID1, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
                 break;
             case EID1:
                 transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.ASSIGN, "1"));
                 transitionDiagram.getLastTransitionStates().addState(NonTerminalType.T1, "3");
-                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.E, "2"));
+                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.E, "2," + LabelType.ASSIGN));
                 transitionDiagram.addTransitionState(new TransitionState(3, NonTerminalType.AE1, "4"));
                 transitionDiagram.addTransitionState(new TransitionState(4, NonTerminalType.SE1, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
@@ -1865,7 +1865,7 @@ public class DataBase {
             case SE1:
                 transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.R, "1"));
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, "2");
-                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.AE, "2"));
+                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.AE, "2," + LabelType.LTOREQ));
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
                 break;
             case AE:
@@ -1876,17 +1876,17 @@ public class DataBase {
             case AE1:
                 transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.A, "1"));
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, "2");
-                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.T, "2"));
+                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.T, "2," + LabelType.PLORMI));
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
                 break;
             case A:
-                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.PLUS, "1"));
-                transitionDiagram.getLastTransitionStates().addState(TerminalType.MINUS, "1");
+                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.PLUS, "1," + LabelType.PLUS));
+                transitionDiagram.getLastTransitionStates().addState(TerminalType.MINUS, "1," + LabelType.MINUS);
                 transitionDiagram.addTransitionState(new TransitionState(1, true));
                 break;
             case R:
-                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.LESS, "1"));
-                transitionDiagram.getLastTransitionStates().addState(TerminalType.EQ, "1");
+                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.LESS, "1," + LabelType.LT));
+                transitionDiagram.getLastTransitionStates().addState(TerminalType.EQ, "1," + LabelType.EQ);
                 transitionDiagram.addTransitionState(new TransitionState(1, true));
                 break;
             case T:
@@ -1897,7 +1897,7 @@ public class DataBase {
             case T1:
                 transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.MULTIPLE, "1"));
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, "2");
-                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.SF, "2"));
+                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.SF, "2," + LabelType.FMULT));
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
                 break;
             case SF:
@@ -1908,61 +1908,61 @@ public class DataBase {
             case SF1:
                 transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.F1, "1"));
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.PLUS, "2");
-                transitionDiagram.getLastTransitionStates().addState(TerminalType.MINUS, "2");
+                transitionDiagram.getLastTransitionStates().addState(TerminalType.MINUS, "2," + LabelType.FMINUS);
                 transitionDiagram.addTransitionState(new TransitionState(2, NonTerminalType.F, "1"));
                 transitionDiagram.addTransitionState(new TransitionState(1, true));
                 break;
             case F:
                 transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.VC, "1"));
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.PL, "2");
-                transitionDiagram.getLastTransitionStates().addState(TerminalType.NUM, "1");
+                transitionDiagram.getLastTransitionStates().addState(TerminalType.NUM, LabelType.NUM + ",1");
                 transitionDiagram.addTransitionState(new TransitionState(2, NonTerminalType.E, "3"));
                 transitionDiagram.addTransitionState(new TransitionState(3, TerminalType.PR, "1"));
                 transitionDiagram.addTransitionState(new TransitionState(1, true));
                 break;
             case F1:
-                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.NUM, "1"));
+                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.NUM, LabelType.NUM + ",1"));
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.PL, "2");
                 transitionDiagram.addTransitionState(new TransitionState(2, NonTerminalType.E, "3"));
                 transitionDiagram.addTransitionState(new TransitionState(3, TerminalType.PR, "1"));
                 transitionDiagram.addTransitionState(new TransitionState(1, true));
                 break;
             case VC:
-                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.ID, "1"));
+                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.ID, LabelType.SYMBOL + ",1"));
                 transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.VC1, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
                 break;
             case VC1:
                 transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.BL, "1"));
-                transitionDiagram.getLastTransitionStates().addState(TerminalType.PL, "4");
+                transitionDiagram.getLastTransitionStates().addState(TerminalType.PL, LabelType.FUNCALL + ",4");
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, "3");
                 transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.E, "2"));
-                transitionDiagram.addTransitionState(new TransitionState(2, TerminalType.BR, "3"));
+                transitionDiagram.addTransitionState(new TransitionState(2, TerminalType.BR, "3," + LabelType.GETARR));
                 transitionDiagram.addTransitionState(new TransitionState(4, NonTerminalType.ARGS, "4"));
-                transitionDiagram.addTransitionState(new TransitionState(5, TerminalType.PR, "3"));
+                transitionDiagram.addTransitionState(new TransitionState(5, TerminalType.PR, "3," + LabelType.FUNCALLJP));
                 transitionDiagram.addTransitionState(new TransitionState(3, true));
                 break;
             case VC2:
-                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.PL, "1"));
+                transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.PL, LabelType.FUNCALL + ",1"));
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, "3");
                 transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.ARGS, "2"));
-                transitionDiagram.addTransitionState(new TransitionState(2, TerminalType.PR, "3"));
+                transitionDiagram.addTransitionState(new TransitionState(2, TerminalType.PR, "3," + LabelType.FUNCALLJP));
                 transitionDiagram.addTransitionState(new TransitionState(3, true));
                 break;
             case ARGS:
-                transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.ARL, "1"));
+                transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.ARL, LabelType.ZEROARGNUM + ",1"));
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, "1");
                 transitionDiagram.addTransitionState(new TransitionState(1, true));
                 break;
             case ARL:
-                transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.E, "1"));
+                transitionDiagram.addTransitionState(new TransitionState(0, NonTerminalType.E, "1," + LabelType.COUNTARG));
                 transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.ARL1, "2"));
                 transitionDiagram.addTransitionState(new TransitionState(2, true));
                 break;
             case ARL1:
                 transitionDiagram.addTransitionState(new TransitionState(0, TerminalType.COMMA, "1"));
                 transitionDiagram.getLastTransitionStates().addState(TerminalType.EPSILON, "3");
-                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.E, "2"));
+                transitionDiagram.addTransitionState(new TransitionState(1, NonTerminalType.E, "2," + LabelType.COUNTARG));
                 transitionDiagram.addTransitionState(new TransitionState(2, NonTerminalType.ARL1, "3"));
                 transitionDiagram.addTransitionState(new TransitionState(3, true));
                 break;

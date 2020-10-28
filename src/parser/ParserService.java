@@ -1,5 +1,6 @@
 package parser;
 
+import codegeneration.CodeGenerater;
 import domain.*;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.Stack;
 public class ParserService {
     private ScannerService scannerService;
     private Stack<TransitionDiagram> parseStack;
+    private CodeGenerater codeGenerater = new CodeGenerater();
 
     public ParserService(ScannerService scannerService) {
         this.scannerService = scannerService;
@@ -38,7 +40,7 @@ public class ParserService {
                             int newState = Integer.parseInt(outputs[i]);
                             lastTransitionDiagram().setCurrentState(newState);
                         } catch (Exception e) {
-                            e.getStackTrace();
+                            codeGenerater.handleRoutine(LabelType.valueOf(outputs[i]), scanToken);
                         }
                     }
                     break;
@@ -72,7 +74,7 @@ public class ParserService {
                             int newState = Integer.parseInt(outputs[i]);
                             lastTransitionDiagram().setCurrentState(newState);
                         } catch (Exception e) {
-                            e.getStackTrace();
+                            codeGenerater.handleRoutine(LabelType.valueOf(outputs[i]), scanToken);
                         }
                     }
                     parseStack.push(DataBase.makeTransitionDiagram(nonTerminalType.getKey()));
